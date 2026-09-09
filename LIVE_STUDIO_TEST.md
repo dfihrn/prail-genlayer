@@ -11,6 +11,8 @@ not contain private keys.
 - Primary end-to-end proof: [Stage D frontend protected execution](#stage-d-frontend-protected-execution-proof),
   with parent `0xe71d375bd4304c203fd52b8f9b21b85cdd1f5c8a2a21a6fe8341c9c36c794a61`
   and child `0x38dfcc275189a116152b4830668639aee982e398b4d82322563c338a15e79b20`.
+- Public frontend: [https://prail-genlayer.vercel.app/](https://prail-genlayer.vercel.app/),
+  with a separately finalized production diagnostic recorded below.
 - Historical proofs: the original `0 → 15` protected execution, deterministic
   `40/100` rejection, and browser Stages A–C.
 - Verification boundaries and limitations are documented below; missing
@@ -132,6 +134,32 @@ The original `0 → 15` live execution and Stage A/C observations at allocation
 concentration limit; any further positive Aave allocation should deterministically
 fail before evidence evaluation. No additional transaction is needed to support
 that consequence because the cap is covered by the deterministic tests.
+
+## Public production frontend diagnostic proof
+
+The publicly deployed [Prail frontend](https://prail-genlayer.vercel.app/) was
+verified through this real production path:
+
+`Public Vercel frontend → MetaMask / GenLayer Wallet → GenLayer Studionet 61999`
+`→ MANDATE v3 → controlled evidence retrieval → validator consensus`
+`→ finalized diagnostic result`
+
+- Diagnostic transaction:
+  `0x9127e368cee10c9b6d525a52e603bff82ec45e2ebb0ab7be4a5c59f9dc8f0f04`
+- `current_status_state`: `NO_ACTIVE_INCIDENT`
+- `security_context_state`: `NON_CONTRADICTORY_CONTEXT`
+- `combined_evidence_state`: `NO_ACTIVE_INCIDENT`
+- `decision`: `APPROVE`
+- `retrieval_status`: `COMPLETE`
+- `sources_checked`: `2`
+- Transaction status: `FINALIZED`
+
+This was diagnostic only. It did not authorize or execute an allocation and did
+not change TargetTreasury. It is separate from the Stage D protected-execution
+proof: an `APPROVE` diagnostic cannot be reused as authorization, and
+`MANDATE.execute_allocation` independently retrieves and evaluates current evidence
+for an actual protected action. The canonical treasury state remains `100` total /
+`25` allocated / `25` maximum / `0` remaining capacity.
 
 ## Network and demo constants
 

@@ -108,6 +108,7 @@ current-state evidence; absence of incident language is not treated as approval.
 
 - Network: GenLayer Studionet
 - Chain ID: `61999`
+- Public frontend: [https://prail-genlayer.vercel.app/](https://prail-genlayer.vercel.app/)
 - MANDATE v3: `0x7A94f7908eafC5476af0f019828C9212dBD32cE6`
 - TargetTreasury: `0xc9F2f0874906b06E187F19d6bE38a21368F80E40`
 - Aave V3 Ethereum Pool: `0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2`
@@ -183,6 +184,13 @@ performed a fresh evidence assessment for this protected action.
   tracked through finalization and returned `NO_ACTIVE_INCIDENT` / `APPROVE`,
   retrieval `COMPLETE`, with two sources checked. It did not authorize execution
   or mutate TargetTreasury; its result cannot be reused for a later allocation.
+- **Public production frontend diagnostic — diagnostic only:** the deployed
+  [Prail frontend](https://prail-genlayer.vercel.app/) submitted transaction
+  `0x9127e368cee10c9b6d525a52e603bff82ec45e2ebb0ab7be4a5c59f9dc8f0f04`
+  through MetaMask / GenLayer Wallet to Studionet. It finalized with
+  `NO_ACTIVE_INCIDENT` / `APPROVE`, retrieval `COMPLETE`, and two sources checked.
+  This was a separate non-mutating diagnostic and did not authorize or execute an
+  allocation.
 
 ## Run locally
 
