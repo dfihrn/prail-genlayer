@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Prail — evidence-aware execution control for autonomous protocols.">
+  <title>Prail · Evidence-aware execution control</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5.3.0/index.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5.3.0/index.css" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#overview"><img class="prail-logo" src="/prail-logo.png" alt="Prail"></a>
+    <div class="network-meta"><span class="built-on">Built on GenLayer</span><span class="brand-mark" aria-hidden="true"><img src="./assets/genlayer-mark.svg" alt=""></span><button class="network-pill" id="wallet-control" type="button" aria-live="polite">Connect Wallet</button><span class="network-pill"><i></i>Studionet · 61999</span></div>
+  </header>
+  <main>
+    <section class="hero" id="overview">
+      <p class="eyebrow">AUTONOMOUS PROTOCOL ENFORCEMENT</p>
+      <h1>Evidence-aware execution control</h1>
+      <p class="lede">Prail combines deterministic operating limits with GenLayer consensus over live external evidence, then enforces approved decisions through finalized cross-contract execution.</p>
+      <p class="live-line"><i></i><strong>LIVE ON STUDIONET</strong><span>MANDATE v3 · Chain 61999</span></p>
+    </section>
+
+    <section class="constitution" aria-labelledby="mandate-rule">
+      <div class="constitution-heading"><p class="eyebrow">PRAIL 01</p><h2 id="mandate-rule">Protected allocation policy</h2></div>
+      <blockquote>“An allocation may not exceed 25% of treasury funds and may proceed only when there is no credible unresolved evidence of an active security incident affecting the target protocol.”</blockquote>
+      <div class="rule-split"><div><span>DETERMINISTIC</span><strong>Allocation ≤ 25%</strong></div><b aria-hidden="true">−</b><div><span>JUDGMENT</span><strong>No credible unresolved active security incident</strong></div></div>
+    </section>
+
+    <section class="action-workbench" aria-label="Agent action and policy pipeline">
+      <div class="proposal-compact">
+        <div class="proposal-title"><div><p class="eyebrow">AGENT ACTION</p><h2>Evaluate allocation</h2></div><span class="data-label">LOCAL PREVIEW</span></div>
+        <div class="proposal-row">
+          <div class="protocol-compact"><span class="token-mark">A</span><div><span>Protocol</span><strong>Aave V3 Ethereum Pool</strong></div></div>
+          <label class="amount-compact" for="amount"><span>Additional allocation</span><div class="amount-field"><input id="amount" type="number" min="0" step="1" value="1"><b id="amount-total">OF —</b></div></label>
+          <button class="evaluate-button" id="evaluate" type="button"><span>Evaluate Policy</span><b>→</b></button>
+        </div>
+        <div class="quick-values"><button type="button" data-amount="1" class="active">1 · test proposal</button><button type="button" data-amount="5">5 · test proposal</button><span>Preview first · live execution requires confirmation</span></div>
+        <button class="live-execute-button" id="execute-protected" type="button" disabled>Execute Protected Allocation</button>
+        <p class="execution-explanation" id="execution-explanation">Waiting for finalized treasury state.</p>
+      </div>
+
+      <div class="policy-section" id="policy">
+        <div class="pipeline-heading"><p class="eyebrow">POLICY PIPELINE</p><p id="result-summary">Evaluate a positive proposal against the current finalized allocation.</p></div>
+        <ol class="pipeline" id="pipeline">
+          <li class="stage" data-stage="deterministic"><span class="stage-index">01</span><div class="stage-copy"><p class="stage-kicker">DETERMINISTIC</p><h3>25% concentration cap</h3><p>Ordinary contract logic.</p></div><span class="stage-status">Ready</span></li>
+          <li class="pipeline-arrow">→</li>
+          <li class="stage" data-stage="evidence"><span class="stage-index">02</span><div class="stage-copy"><p class="stage-kicker">EVIDENCE</p><h3>Configured sources</h3><p>Current status + context.</p></div><span class="stage-status">Waiting</span></li>
+          <li class="pipeline-arrow">→</li>
+          <li class="stage" data-stage="consensus"><span class="stage-index">03</span><div class="stage-copy"><p class="stage-kicker">CONSENSUS</p><h3>Normalized judgment</h3><p>Validators agree on state.</p></div><span class="stage-status">Waiting</span></li>
+          <li class="pipeline-arrow">→</li>
+          <li class="stage" data-stage="execution"><span class="stage-index">04</span><div class="stage-copy"><p class="stage-kicker">EXECUTION</p><h3>Protected treasury</h3><p>Authorize or block.</p></div><span class="stage-status">Waiting</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="treasury-section">
+      <article class="card"><header class="card-head"><div><p class="eyebrow">PROTECTED TREASURY</p><h2>Current state</h2></div><span class="data-label recorded" id="treasury-read-status">LOADING LIVE</span></header>
+        <div class="treasury-numbers"><div><span>Total funds</span><strong id="treasury-total">—</strong></div><div><span>Current allocation</span><strong id="treasury-allocation">—</strong></div></div>
+        <dl class="detail-list"><div><dt>Protocol</dt><dd>Aave V3 Ethereum Pool</dd></div><div><dt>Maximum exposure</dt><dd><b>25%</b> · <span id="treasury-maximum">— units</span></dd></div><div><dt>Remaining capacity</dt><dd id="treasury-remaining">— units</dd></div></dl>
+        <div class="address-grid"><button data-copy="0x7A94f7908eafC5476af0f019828C9212dBD32cE6"><span>MANDATE</span><code>0x7A94…32cE6</code></button><button data-copy="0xc9F2f0874906b06E187F19d6bE38a21368F80E40"><span>TargetTreasury</span><code>0xc9F2…80E40</code></button></div>
+      </article>
+    </section>
+
+    <section class="evidence-section" id="evidence"><div class="section-intro"><div><p class="eyebrow">EVIDENCE + CONSENSUS</p><h2 id="decision-title">Awaiting evaluation</h2></div><div class="diagnostic-controls"><button class="diagnostic-button" id="diagnose" type="button" disabled>Run Live Diagnostic</button><span class="decision-chip neutral" id="decision-chip">READY</span></div></div>
+      <div class="evidence-map"><div class="source-column"><div class="evidence-node"><span>CURRENT STATUS</span><strong id="current-state">—</strong><small>status.aave.com</small></div><div class="evidence-node"><span>SECURITY CONTEXT</span><strong id="context-state">—</strong><small>aave.com/security</small></div></div><div class="map-arrow">→</div><div class="evidence-node combined"><span>COMBINED EVIDENCE</span><strong id="combined-state">—</strong><small>Role-aware composition</small></div><div class="map-arrow">→</div><div class="evidence-node consensus"><span>CONSENSUS DECISION</span><strong id="consensus-state">—</strong><small>GenLayer validators</small></div></div>
+      <div class="evidence-footer"><div><span>DETERMINISTIC CAP</span><strong id="cap-result">—</strong></div><div><span>RETRIEVAL</span><strong id="retrieval-state">—</strong></div><div><span>SOURCES</span><strong id="sources-state">—</strong></div><div><span>TRANSACTION</span><strong id="execution-state">—</strong></div></div><p class="diagnostic-transaction" id="diagnostic-transaction" hidden></p><p class="diagnostic-transaction" id="allocation-transactions" hidden></p><p class="result-disclosure" id="result-disclosure">This panel shows live diagnostic or protected-execution results from this browser session. Recorded Stage D proof appears separately below. A diagnostic result never authorizes execution.</p>
+    </section>
+
+    <dialog class="execution-confirmation" id="execution-confirmation"><form method="dialog"><p class="eyebrow">LIVE EXECUTION CONFIRMATION</p><h2>Execute protected allocation?</h2><dl><div><dt>Protocol</dt><dd>Aave V3 Ethereum Pool</dd></div><div><dt>Current allocation</dt><dd id="confirm-current">—</dd></div><div><dt>Additional requested</dt><dd id="confirm-additional">—</dd></div><div><dt>Resulting allocation</dt><dd id="confirm-resulting">—</dd></div><div><dt>Maximum allowed</dt><dd id="confirm-maximum">—</dd></div></dl><p>MANDATE will rerun live security evidence. A previous diagnostic APPROVE is not reused. The treasury changes only if MANDATE approves and the finalized child execution succeeds.</p><div class="confirmation-actions"><button value="cancel">Cancel</button><button id="confirm-execution" value="default">Confirm Live Execution</button></div></form></dialog>
+
+    <section class="deployment-section" id="deployment"><div class="deployment-title"><div><p class="eyebrow">RECORDED LIVE PROOF · STAGE D</p><h2>Verified protected execution</h2></div><span class="verified-seal">✓ TREASURY EXECUTED</span></div>
+      <dl class="proof-ledger"><div><dt>Allocation</dt><dd>15 → 25</dd></div><div><dt>Additional</dt><dd>10</dd></div><div><dt>Deterministic</dt><dd><span class="success-text">PASS · 15 + 10 ≤ 25</span></dd></div><div><dt>Current status</dt><dd><code>NO_ACTIVE_INCIDENT</code></dd></div><div><dt>Security context</dt><dd><code>NON_CONTRADICTORY_CONTEXT</code></dd></div><div><dt>Combined evidence</dt><dd><code>NO_ACTIVE_INCIDENT</code></dd></div><div><dt>Consensus</dt><dd><span class="success-text">APPROVE</span></dd></div><div><dt>Retrieval</dt><dd>COMPLETE · 2 SOURCES</dd></div><div><dt>Parent</dt><dd><span class="success-text">FINALIZED</span></dd></div><div><dt>Child</dt><dd><span class="success-text">FINALIZED</span></dd></div><div class="transaction-row"><dt>Parent transaction</dt><dd><a href="https://explorer-studio.genlayer.com/transactions/0xe71d375bd4304c203fd52b8f9b21b85cdd1f5c8a2a21a6fe8341c9c36c794a61" target="_blank" rel="noreferrer"><code>0xe71d375bd4304c203fd52b8f9b21b85cdd1f5c8a2a21a6fe8341c9c36c794a61</code><span>VIEW ↗</span></a></dd></div><div class="transaction-row"><dt>Child transaction</dt><dd><a href="https://explorer-studio.genlayer.com/transactions/0x38dfcc275189a116152b4830668639aee982e398b4d82322563c338a15e79b20" target="_blank" rel="noreferrer"><code>0x38dfcc275189a116152b4830668639aee982e398b4d82322563c338a15e79b20</code><span>VIEW ↗</span></a></dd></div><div><dt>Final treasury reread</dt><dd><span class="success-text">LATEST_FINAL · 25</span></dd></div><div><dt>Execution</dt><dd><span class="success-text">TREASURY EXECUTED</span></dd></div></dl><p class="proof-note">Recorded live proof from GenLayer Studionet. This section is historical evidence of the completed Stage D path, not a replay or current transaction state.</p>
+      <div class="historical-proof"><p class="eyebrow">HISTORICAL LIVE PROOF</p><h3>Initial 0 → 15 allocation</h3><p>Earlier protected execution · <span class="success-text">APPROVE · FINALIZED · SUCCESS</span></p><a href="https://explorer-studio.genlayer.com/transactions/0xada0299fef334577fbe73e4daab56eb33292c7109c64bcd8a2e1fc624e5545ca" target="_blank" rel="noreferrer"><code>0xada0299fef334577fbe73e4daab56eb33292c7109c64bcd8a2e1fc624e5545ca</code><span>VIEW ↗</span></a></div>
+    </section>
+  </main>
+  <footer><div><img class="footer-logo" src="/prail-logo.png" alt="Prail"><span>Independent hackathon project built on GenLayer.</span></div><a href="#overview">Back to top ↑</a></footer>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

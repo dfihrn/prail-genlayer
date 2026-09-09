@@ -1,0 +1,155 @@
+{
+  "network": "GenLayer Studionet",
+  "chainId": 61999,
+  "contracts": {
+    "mandate": {
+      "version": "v3",
+      "address": "0x7A94f7908eafC5476af0f019828C9212dBD32cE6"
+    },
+    "targetTreasury": {
+      "address": "0xc9F2f0874906b06E187F19d6bE38a21368F80E40",
+      "authorizedMandate": "0x7A94f7908eafC5476af0f019828C9212dBD32cE6",
+      "totalFunds": 100
+    }
+  },
+  "registeredProtocol": {
+    "name": "Aave V3 Ethereum Pool",
+    "address": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"
+  },
+  "currentTreasuryState": {
+    "totalFunds": 100,
+    "aaveAllocation": 25,
+    "maximumExposurePercent": 25,
+    "maximumExposureUnits": 25,
+    "availableAdditionalAaveCapacity": 0
+  },
+  "liveProof": {
+    "historical": true,
+    "description": "Historical initial protected allocation from 0 to 15; not current treasury state",
+    "initialAllocation": 0,
+    "protectedProposal": 15,
+    "executeAllocationTransaction": "0xada0299fef334577fbe73e4daab56eb33292c7109c64bcd8a2e1fc624e5545ca",
+    "evidence": {
+      "currentStatusState": "NO_ACTIVE_INCIDENT",
+      "combinedEvidenceState": "NO_ACTIVE_INCIDENT",
+      "decision": "APPROVE",
+      "retrievalStatus": "COMPLETE",
+      "sourcesChecked": 2,
+      "sourceUrls": [
+        "https://status.aave.com/",
+        "https://aave.com/security"
+      ],
+      "validatorConsensus": "ACCEPTED"
+    },
+    "execution": {
+      "status": "FINALIZED",
+      "result": "SUCCESS",
+      "finalAllocation": 15
+    }
+  },
+  "deterministicProof": {
+    "treasuryFunds": 100,
+    "rejectedProposal": 40,
+    "capPercent": 25,
+    "rejectedBeforeWebOrLlmJudgment": true,
+    "treasuryUnchanged": true
+  },
+  "frontendIntegrationProof": {
+    "stageA": {
+      "historicalAtStageCompletion": true,
+      "finalizedTotalFunds": 100,
+      "finalizedAaveAllocation": 15,
+      "maximumTotalExposure": 25,
+      "availableAdditionalCapacity": 10
+    },
+    "stageB": {
+      "manuallyVerified": true,
+      "walletFlow": [
+        "browser",
+        "MetaMask",
+        "GenLayer Wallet",
+        "Studionet"
+      ],
+      "chainIdHex": "0xF22F",
+      "connectedAccountDisplayed": true,
+      "reconnectSucceeded": true
+    },
+    "stageC": {
+      "diagnosticOnly": true,
+      "transaction": "0x95f36feb6d63e370a274e1082c195bf2aaec678eb2c8f1959c0ad46eaebdac03",
+      "method": "diagnose_protocol_security",
+      "protocol": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+      "lifecycle": [
+        "SUBMITTED",
+        "PROCESSING",
+        "DECIDED",
+        "FINALIZING",
+        "FINALIZED"
+      ],
+      "result": {
+        "currentStatusState": "NO_ACTIVE_INCIDENT",
+        "securityContextState": "NON_CONTRADICTORY_CONTEXT",
+        "combinedEvidenceState": "NO_ACTIVE_INCIDENT",
+        "decision": "APPROVE",
+        "retrievalStatus": "COMPLETE",
+        "sourcesChecked": 2
+      },
+      "targetTreasuryMutated": false,
+      "reusableAuthorization": false
+    },
+    "stageD": {
+      "manuallyVerified": true,
+      "method": "execute_allocation",
+      "parentTransaction": "0xe71d375bd4304c203fd52b8f9b21b85cdd1f5c8a2a21a6fe8341c9c36c794a61",
+      "childTransaction": "0x38dfcc275189a116152b4830668639aee982e398b4d82322563c338a15e79b20",
+      "childTarget": "0xc9F2f0874906b06E187F19d6bE38a21368F80E40",
+      "protocol": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+      "totalFunds": 100,
+      "allocationBefore": 15,
+      "amountAdded": 10,
+      "allocationAfter": 25,
+      "maximumPermittedExposure": 25,
+      "maximumAllocation": 25,
+      "remainingCapacity": 0,
+      "deterministicPolicyResult": "PASS",
+      "deterministicResult": "PASS",
+      "evidence": {
+        "currentStatusState": "NO_ACTIVE_INCIDENT",
+        "securityContextState": "NON_CONTRADICTORY_CONTEXT",
+        "combinedEvidenceState": "NO_ACTIVE_INCIDENT",
+        "decision": "APPROVE",
+        "retrievalStatus": "COMPLETE",
+        "sourcesChecked": 2,
+        "sourceUrls": [
+          "https://status.aave.com/",
+          "https://aave.com/security"
+        ]
+      },
+      "parentExecution": {
+        "consensus": "ACCEPTED",
+        "status": "FINALIZED",
+        "result": "SUCCESS"
+      },
+      "childExecution": {
+        "status": "FINALIZED",
+        "result": "SUCCESS"
+      },
+      "finalizedTreasuryRead": {
+        "method": "get_allocation",
+        "stateVariant": "LATEST_FINAL",
+        "observedAllocation": 25
+      },
+      "stageCDiagnosticReused": false,
+      "frontendDisplayed": "TREASURY EXECUTED",
+      "finalExecutionStatus": "TREASURY EXECUTED"
+    },
+    "sdk": {
+      "package": "genlayer-js",
+      "version": "1.1.8",
+      "writePath": "writeContract",
+      "returnDecoder": "abi.calldata.decode",
+      "v2OrRcIntroduced": false,
+      "debugTraceTransactionRequired": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "network": "studionet",
+  "rpcUrl": "https://studio.genlayer.com/api",
+  "chainId": 61999,
+  "deployer": "",
+  "mandate": {
+    "address": "",
+    "deploymentTransaction": ""
+  },
+  "targetTreasury": {
+    "address": "",
+    "deploymentTransaction": "",
+    "authorizedMandate": "",
+    "totalFunds": "100"
+  },
+  "aaveProtocol": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+  "assessmentTransaction": "",
+  "allocationTransaction": "",
+  "triggeredTreasuryTransaction": ""
+}
