@@ -32,6 +32,8 @@ main{padding:24px 0 72px}.eyebrow{margin:0;color:var(--blue);font:700 .7rem var(
 @media(max-width:680px){.diagnostic-controls{width:100%;justify-content:space-between}.evidence-footer{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:no-preference){.stage,.decision-chip,button,a{transition:color .16s,background-color .16s,border-color .16s}}
 
+.address-grid a{padding:12px;border:1px solid var(--line);background:var(--paper);color:inherit;text-align:left;text-decoration:none;cursor:pointer}.address-grid a:hover{border-color:var(--blue);background:var(--blue-soft)}
+
 /* Major-section rhythm only. */
 main{padding-top:48px;padding-bottom:var(--section-gap)}
 .constitution{margin-top:52px}
