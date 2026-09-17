@@ -1,14 +1,15 @@
-# { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
+# { "Depends": "py-genlayer:5jycge4q8k23462jtb0b9fyey1s9qz928sz2nbrd9mg4sxqg2qng" }
 
-from genlayer import *
+import genlayer as gl
+from genlayer.types import *
 
 
-class TargetTreasury(gl.Contract):
+class TargetTreasury(gl.contract.Contract):
     """Minimal allocation ledger protected by a single MANDATE contract."""
 
     mandate_address: Address
     total_funds: u256
-    allocations: TreeMap[Address, u256]
+    allocations: gl.storage.TreeMap[Address, u256]
 
     def __init__(self, mandate_address: str, total_funds: u256):
         if total_funds == 0:

@@ -1,6 +1,7 @@
-# { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
+# { "Depends": "py-genlayer:5jycge4q8k23462jtb0b9fyey1s9qz928sz2nbrd9mg4sxqg2qng" }
 
-from genlayer import *
+import genlayer as gl
+from genlayer.types import *
 
 
 SECURITY_DECISIONS = ("APPROVE", "REJECT", "UNDETERMINED")
@@ -233,26 +234,28 @@ def compose_evidence_states(status_state: str, security_state: str) -> str:
     return "UNCLEAR"
 
 
-@gl.contract_interface
-class TargetTreasury:
-    class View:
-        def get_total_funds(self) -> u256: ...
-
-        def get_allocation(self, protocol: str) -> u256: ...
-
-    class Write:
-        def record_allocation(self, protocol: str, amount: u256) -> None: ...
 
 
-class Mandate(gl.Contract):
+class Mandate(gl.contract.Contract):
     """Deterministic and consensus-based policy checks for protocol actions."""
 
+    total_funds: u256
+    allocations: gl.storage.TreeMap[Address, u256]
+
     def __init__(self):
-        pass
+        self.total_funds = u256(100)
 
     @gl.public.view
     def health(self) -> str:
         return "MANDATE_READY"
+
+    @gl.public.view
+    def get_total_funds(self) -> u256:
+        return self.total_funds
+
+    @gl.public.view
+    def get_allocation(self, protocol: str) -> u256:
+        return self.allocations.get(Address(protocol), u256(0))
 
     @gl.public.view
     def is_allocation_allowed(
@@ -314,7 +317,7 @@ Return JSON with exactly this decision-bearing field:
             validator_decision = classify()
             return validator_decision["decision"] == leader_decision["decision"]
 
-        result = gl.vm.run_nondet_unsafe(classify, validate)
+        result = gl.vm.run_nondet_default(classify, validate)
         return result["decision"]
 
     def _assess_registered_protocol(self, protocol: Address) -> dict:
@@ -476,7 +479,7 @@ Return JSON with exactly this decision-bearing field:
                 == leader_retrieval_status
             )
 
-        return gl.vm.run_nondet_unsafe(retrieve_and_classify, validate)
+        return gl.eq_principle.strict_eq(retrieve_and_classify)
 
     @gl.public.write
     def assess_security_incident(self, evidence: str) -> str:
@@ -501,19 +504,16 @@ Return JSON with exactly this decision-bearing field:
 
     @gl.public.write
     def execute_allocation(
-        self,
-        treasury_address: str,
-        protocol: str,
-        amount: u256,
-    ) -> None:
-        """Apply deterministic then judgment policy before treasury execution."""
-        treasury = TargetTreasury(Address(treasury_address))
+    self,
+    treasury_address: str,
+    protocol: str,
+    amount: u256,
+) -> None:
+        """Apply deterministic then evidence policy before protected state update."""
         protocol_address = Address(protocol)
-        treasury_funds = treasury.view().get_total_funds()
-        current_allocation = treasury.view().get_allocation(protocol)
+        treasury_funds = self.total_funds
+        current_allocation = self.allocations.get(protocol_address, u256(0))
 
-        # Bound the addition before performing it so u256 arithmetic cannot
-        # overflow even if a malformed treasury reports inconsistent state.
         if (
             current_allocation > treasury_funds
             or amount > treasury_funds - current_allocation
@@ -529,4 +529,4 @@ Return JSON with exactly this decision-bearing field:
         if security_decision != "APPROVE":
             raise gl.vm.UserError("Security decision: " + security_decision)
 
-        treasury.emit(on="finalized").record_allocation(protocol, amount)
+        self.allocations[protocol_address] = proposed_total
