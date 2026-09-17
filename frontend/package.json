@@ -9,7 +9,8 @@
     "preview": "vite preview --host 127.0.0.1 --configLoader native"
   },
   "dependencies": {
-    "genlayer-js": "1.1.8"
+    "genlayer-js": "1.1.8",
+    "genlayer-js-next": "npm:genlayer-js@2.0.0-rc.1"
   },
   "devDependencies": {
     "vite": "7.1.4"

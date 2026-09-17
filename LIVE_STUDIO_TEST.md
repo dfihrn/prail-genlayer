@@ -4,6 +4,36 @@ This document records Prail's successful live proof using the deployed MANDATE v
 Intelligent Contract and retains the manual steps needed to reproduce it. It does
 not contain private keys.
 
+## Studio Next compatibility path
+
+Studio Next is a distinct release-candidate environment, not an upgrade or alias
+of the stable Studionet deployment documented below. The frontend's `/next` path
+targets only this configuration:
+
+- Network: GenLayer Studio Next / `studio-dev`
+- Chain ID: `61997` (`0xF22D`)
+- RPC: `https://studio-dev.genlayer.com/api`
+- Explorer: `https://explorer-studio-dev.genlayer.com`
+- MANDATE: `0x5839b040a1cDfc26dDe8f3b5b00c309451cff26A`
+- TargetTreasury reference: `0xa4B490C4b3D6d72a43BB4368757Dd405F49477c4`
+- Aave V3 Ethereum: `0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2`
+
+The Studio Next MANDATE exposes
+`execute_allocation(treasury_address, protocol, amount)` and stores the allocation
+read by `get_allocation(protocol)`. A manual amount-`15` execution was observed as
+`FINALIZED`; retrieval was `COMPLETE` with two sources,
+`current_status_state = NO_ACTIVE_INCIDENT`,
+`security_context_state = NON_CONTRADICTORY_CONTEXT`, decision `APPROVE`, and the
+final Aave allocation was `15`. No transaction hash was supplied, so none is
+recorded.
+
+The `/next` frontend validates and reads this deployment with the matching
+`genlayer-js@2.0.0-rc.1` release candidate, estimates the current fee policy before
+a write, tracks finalization, and rereads the MANDATE allocation. It does not
+reuse the stable TargetTreasury child-transaction model. The root `/` frontend,
+stable `61999` addresses, Stage C and D hashes, and canonical stable treasury
+state remain unchanged.
+
 ## Canonical proof at a glance
 
 - Current finalized state: `100` total / `25` allocated / `25` maximum / `0`

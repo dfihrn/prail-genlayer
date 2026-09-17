@@ -125,6 +125,34 @@ Aave allocation should fail before web retrieval or LLM judgment. The canonical
 machine-readable record is
 [`deployments/studionet.json`](deployments/studionet.json).
 
+### Studio Next reviewer path
+
+The repository also contains an isolated `/next` reviewer path for the separate
+GenLayer Studio Next / `studio-dev` preview environment. After deployment, it is
+served at `https://prail-genlayer.vercel.app/next`; locally, use the `/next` path
+shown by Vite. It does not replace or reconfigure the stable `/` application.
+
+- Chain ID: `61997` (`0xF22D`)
+- RPC: `https://studio-dev.genlayer.com/api`
+- Explorer: `https://explorer-studio-dev.genlayer.com`
+- MANDATE: `0x5839b040a1cDfc26dDe8f3b5b00c309451cff26A`
+- TargetTreasury reference: `0xa4B490C4b3D6d72a43BB4368757Dd405F49477c4`
+- Aave V3 Ethereum: `0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2`
+
+The Studio Next MANDATE is the source of `get_total_funds()` and
+`get_allocation(protocol)` reads. Its protected write is
+`execute_allocation(treasury_address, protocol, amount)`. The `/next` frontend
+uses the official Studio Next `genlayer-js@2.0.0-rc.1` through an isolated npm
+alias so the stable root app remains pinned to `genlayer-js@1.1.8`.
+
+A manual Studio Next workflow has already finalized successfully for an
+additional allocation of `15`: both evidence sources were retrieved,
+`current_status_state` was `NO_ACTIVE_INCIDENT`, `security_context_state` was
+`NON_CONTRADICTORY_CONTEXT`, the decision was `APPROVE`, retrieval was
+`COMPLETE`, and the finalized Aave allocation became `15`. No transaction hash
+was supplied, so this repository does not infer one. The structured preview
+record is [`deployments/studio-next.json`](deployments/studio-next.json).
+
 ## Primary end-to-end proof — Stage D
 
 Stage D proved the complete protected path through the real frontend:

@@ -18,6 +18,10 @@ npm run dev
 
 Open the local URL printed by Vite, normally `http://127.0.0.1:5173`.
 
+- `/` is the unchanged stable Studionet `61999` application.
+- `/next` is the dedicated Studio Next / `studio-dev` reviewer path on chain
+  `61997`.
+
 Production build:
 
 ```powershell
@@ -35,6 +39,30 @@ npm run build
 Live treasury reads do not require a wallet. Wallet access is requested only after
 the user clicks **Connect Wallet**, and every write requires explicit confirmation.
 No private key or seed phrase belongs in frontend code or configuration.
+
+### Studio Next reviewer path
+
+`/next` is intentionally isolated from the stable app. It uses:
+
+- RPC `https://studio-dev.genlayer.com/api`;
+- chain `61997` (`0xF22D`);
+- MANDATE `0x5839b040a1cDfc26dDe8f3b5b00c309451cff26A`;
+- TargetTreasury reference `0xa4B490C4b3D6d72a43BB4368757Dd405F49477c4`;
+- Aave V3 Ethereum `0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2`.
+
+The page validates the Studio Next MANDATE schema, reads `get_total_funds()` and
+`get_allocation(Aave)` from `LATEST_FINAL`, and calls
+`execute_allocation(treasuryReference, Aave, amount)` only after local cumulative
+cap preview, explicit wallet connection, and confirmation. It uses the official
+`genlayer-js@2.0.0-rc.1` as the `genlayer-js-next` package alias, including
+`estimateTransactionFeesForWrite`; the root application continues importing the
+stable `genlayer-js@1.1.8` package.
+
+Studio Next is a release-candidate environment and may reset. Its saved pending
+transaction key is `prail:studio-next:protected-allocation:v1`, separate from the
+stable app's persistence keys. A manually verified amount-`15` execution reached
+`FINALIZED`, retrieved two sources, returned `APPROVE`, and left the MANDATE
+allocation at `15`. No transaction hash was supplied or invented.
 
 ## Data and execution boundaries
 
